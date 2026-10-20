@@ -2,6 +2,9 @@
 lockfile = true
 idiomatic_version_file_enable_tools = ["node", "pnpm"]
 
+[tools]
+hk = { version = "2.7.0", workflow = "release.yml" }
+
 [env]
 NODE_ENV = { default = "development" }
 _.path = ["{{config_root}}/node_modules/.bin"]
@@ -48,5 +51,3 @@ description = "Run the dev script from package.json"
 run = "pnpm run dev"
 depends = ["install"]
 
-[tools]
-hk = { version = "latest", workflow = "release.yml" }
