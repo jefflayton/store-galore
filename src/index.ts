@@ -1,8 +1,11 @@
 import { Hono } from 'hono'
 
 import { createDb, schema } from './db'
+import interactions from './interactions'
 
 const app = new Hono<{ Bindings: CloudflareBindings }>()
+
+app.route('/interactions', interactions)
 
 app.get('/', (c) => {
     const data = {

@@ -8,6 +8,8 @@ experimental = true
 idiomatic_version_file_enable_tools = ["node", "pnpm"]
 
 [tools]
+age = "latest"
+cloudflared = "latest"
 fnox = { version = "latest", workflow = "release.yml" }
 hk = { version = "2.7.0", workflow = "release.yml" }
 
@@ -29,3 +31,4 @@ description = "Start the local dev server"
 alias = "d"
 run = "pnpm run dev"
 depends = ["install"]
+secrets = ["DISCORD_PUBLIC_KEY", "DISCORD_APPLICATION_ID", "DISCORD_TOKEN"]
