@@ -4,9 +4,9 @@
 
 Store Galore is a shared-town tycoon: everyone's stores sit on one map per Discord server, and the best moves depend on your friends. Three rules shape every feature below.
 
-* **30 seconds a day.** One check-in covers everything. Nothing punishes a missed day beyond lost profit.
-* **Every check-in touches a friend.** Your daily visit, your neighbors, and town projects all involve other players. No action is purely solo.
-* **One town per server.** Your friend group is the first town. Any server that adds the bot gets its own, which is how the game spreads.
+- **30 seconds a day.** One check-in covers everything. Nothing punishes a missed day beyond lost profit.
+- **Every check-in touches a friend.** Your daily visit, your neighbors, and town projects all involve other players. No action is purely solo.
+- **One town per server.** Your friend group is the first town. Any server that adds the bot gets its own, which is how the game spreads.
 
 ## **Daily loop**
 
@@ -24,22 +24,22 @@ The bot then posts a daily digest in the town channel: who visited whom, new sto
 
 The model splits **templates** (what can exist, shared by all towns) from **instances** (what a player owns in one town). Store definitions live in config; everything per-town lives in Postgres. Store profit isn't saved per tick — it's computed from timestamps at check-in.
 
-| Table | What it holds | Key fields |
-| :---- | :---- | :---- |
-| towns | One per Discord server | guild\_id, grid width/height, day reset hour, current season |
-| players | One per user per town | town\_id, discord\_user\_id, coins, xp, last\_checkin\_at, last\_visit\_at |
-| plots | Grid cells of the town | town\_id, x, y, zone (residential, downtown, park), store\_id (nullable) |
+| Table            | What it holds                   | Key fields                                                                                      |
+| :--------------- | :------------------------------ | :---------------------------------------------------------------------------------------------- |
+| towns            | One per Discord server          | guild\_id, grid width/height, day reset hour, current season                                    |
+| players          | One per user per town           | town\_id, discord\_user\_id, coins, xp, last\_checkin\_at, last\_visit\_at                      |
+| plots            | Grid cells of the town          | town\_id, x, y, zone (residential, downtown, park), store\_id (nullable)                        |
 | store\_templates | Every store type from the notes | name, category (food, shop, activity), size, allowed rarities, base profit, tags, seasonal flag |
-| stores | A store a player owns | owner\_id, template\_id, rarity, plot\_id, acquired\_at, last\_collected\_at |
-| visits | One row per daily trip | visitor\_id, store\_id, day, drop received |
-| town\_projects | Weekly cooperative goals | town\_id, kind, requirements (JSON), progress, reward, ends\_at |
-| achievements | Unlocked titles | player\_id, achievement\_key, unlocked\_at |
-| ledger | Every coin change | player\_id, amount, reason (collect, roll, visit, gamble, sale), ref id |
+| stores           | A store a player owns           | owner\_id, template\_id, rarity, plot\_id, acquired\_at, last\_collected\_at                    |
+| visits           | One row per daily trip          | visitor\_id, store\_id, day, drop received                                                      |
+| town\_projects   | Weekly cooperative goals        | town\_id, kind, requirements (JSON), progress, reward, ends\_at                                 |
+| achievements     | Unlocked titles                 | player\_id, achievement\_key, unlocked\_at                                                      |
+| ledger           | Every coin change               | player\_id, amount, reason (collect, roll, visit, gamble, sale), ref id                         |
 
 Two choices worth keeping:
 
-* **Sizes take multiple plots.** An XL store covers a 2×2 block, so plots.store\_id points several cells at one store. Adjacency checks then work on cells, not stores.
-* **The ledger is the source of truth.** players.coins is a cached sum. That makes gambling disputes, refunds, and balance tuning easy to audit later.
+- **Sizes take multiple plots.** An XL store covers a 2×2 block, so plots.store\_id points several cells at one store. Adjacency checks then work on cells, not stores.
+- **The ledger is the source of truth.** players.coins is a cached sum. That makes gambling disputes, refunds, and balance tuning easy to audit later.
 
 ## **Key mechanics**
 
@@ -47,14 +47,14 @@ Two choices worth keeping:
 
 Roll rarity first, then pick a template that allows that rarity, weighted by size. The notes' odds sum past 100%, so these are suggested weights to start from:
 
-| Rarity | Weight (%) | Profit multiplier |
-| :---- | :---- | :---- |
-| Common | 50 | 1× |
-| Uncommon | 28 | 1.5× |
-| Rare | 15 | 2.5× |
-| Epic | 6 | 4× |
-| Legendary | 0.99 | 8× |
-| Mythical | 0.01 | 20× |
+| Rarity    | Weight (%) | Profit multiplier |
+| :-------- | :--------- | :---------------- |
+| Common    | 50         | 1×                |
+| Uncommon  | 28         | 1.5×              |
+| Rare      | 15         | 2.5×              |
+| Epic      | 6          | 4×                |
+| Legendary | 0.99       | 8×                |
+| Mythical  | 0.01       | 20×               |
 
 Size weights could be XS 10, S 25, M 40, L 20, XL 5\. Season and event modifiers nudge weights for tagged templates (a smoothie shop is likelier in summer).
 
@@ -69,9 +69,9 @@ Bonuses add rather than multiply, so stacking stays predictable. Cap the total b
 
 Templates carry tags (food, sweet, caffeine, nightlife, family, community). Pairs of tags give a bonus when stores touch, and the bonus is bigger when the stores belong to **different owners** — that's the nudge to build next to friends.
 
-* Coffee \+ dessert: \+10% each (+20% if different owners)
-* Bar \+ diner: \+10% each, nightlife
-* Any store next to a community space (park, pool): \+5%, shared by everyone touching it
+- Coffee \+ dessert: \+10% each (+20% if different owners)
+- Bar \+ diner: \+10% each, nightlife
+- Any store next to a community space (park, pool): \+5%, shared by everyone touching it
 
 ### **Visits**
 
@@ -98,9 +98,9 @@ The bot plugs into any existing server and needs one channel and no roles. Your 
 
 ### **What the bot adds to a server**
 
-* **One digest channel.** An admin picks it during setup, and all public game posts go there.
-* **Slash commands.** They work in any channel: /checkin, /visit, /roll, /town, /profile, /title.
-* **Private replies by default.** Personal results (your roll, your wallet, your visit drop) come back as ephemeral messages only you can see, so the game doesn't flood a shared server. Only the digest and big moments, such as a Legendary roll or a finished project, are public.
+- **One digest channel.** An admin picks it during setup, and all public game posts go there.
+- **Slash commands.** They work in any channel: /checkin, /visit, /roll, /town, /profile, /title.
+- **Private replies by default.** Personal results (your roll, your wallet, your visit drop) come back as ephemeral messages only you can see, so the game doesn't flood a shared server. Only the digest and big moments, such as a Legendary roll or a finished project, are public.
 
 ### **Setup flow**
 
@@ -119,20 +119,20 @@ Achievements unlock titles that live in the game, not in Discord. A player picks
 
 Each channel from the original notes maps to something lighter in an existing server:
 
-| From the notes | In an existing server |
-| :---- | :---- |
-| Announcements, special events | Posts in the digest channel |
-| View Land | /town and /profile commands |
-| Rolling, Shop | Slash commands with private replies |
-| Role promotions, achievements | Title unlocks announced in the digest |
-| General, voice chats | The server's existing channels |
-| Support, feedback, dev chats | Your own server for now, a hub server later |
+| From the notes                | In an existing server                       |
+| :---------------------------- | :------------------------------------------ |
+| Announcements, special events | Posts in the digest channel                 |
+| View Land                     | /town and /profile commands                 |
+| Rolling, Shop                 | Slash commands with private replies         |
+| Role promotions, achievements | Title unlocks announced in the digest       |
+| General, voice chats          | The server's existing channels              |
+| Support, feedback, dev chats  | Your own server for now, a hub server later |
 
 ## **Open questions**
 
-* ☐ Free rolls: one per day, or only coin-bought rolls?
-* ☐ Can players move or sell stores to each other, or only back to the bank?
-* ☐ Town size: fixed grid, or does it grow as more players join?
-* ☐ Gambling: keep double-or-nothing, and if so, what daily cap?
-* ☐ Real brand names or parody names ("McDougal's", "Costgo") before other servers join?
-* ☐ Should towns ever interact (trade, leaderboards), or stay fully separate?
+- ☐ Free rolls: one per day, or only coin-bought rolls?
+- ☐ Can players move or sell stores to each other, or only back to the bank?
+- ☐ Town size: fixed grid, or does it grow as more players join?
+- ☐ Gambling: keep double-or-nothing, and if so, what daily cap?
+- ☐ Real brand names or parody names ("McDougal's", "Costgo") before other servers join?
+- ☐ Should towns ever interact (trade, leaderboards), or stay fully separate?

@@ -1,13 +1,23 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+
+min_version = "2026.10.4"
+
 [settings]
 lockfile = true
+experimental = true
 idiomatic_version_file_enable_tools = ["node", "pnpm"]
 
 [tools]
+fnox = { version = "latest", workflow = "release.yml" }
 hk = { version = "2.7.0", workflow = "release.yml" }
+
 
 [env]
 NODE_ENV = { default = "development" }
 _.path = ["{{config_root}}/node_modules/.bin"]
+
+[secrets.fnox]
+
 
 [tasks.install]
 description = "Install the locked npm dependency tree"
