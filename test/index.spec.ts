@@ -16,7 +16,13 @@ describe('worker', () => {
         const response = await exports.default.fetch('https://example.com/towns')
         const towns = await response.json()
 
-        expect(towns).toEqual([expect.objectContaining({ guildId: 'guild-1', resetHour: 6, settings: {} })])
+        expect(towns).toEqual([
+            expect.objectContaining({
+                guildId: 'guild-1',
+                resetHour: 6,
+                settings: {},
+            }),
+        ])
     })
 
     it('loads players with their town via relational queries', async () => {

@@ -1,259 +1,247 @@
 {
-  "version": "7",
-  "dialect": "sqlite",
-  "id": "c78a71e8-ca8a-44ef-9f54-733dc125f564",
-  "prevIds": [
-    "00000000-0000-0000-0000-000000000000"
-  ],
-  "ddl": [
-    {
-      "name": "players",
-      "entityType": "tables"
-    },
-    {
-      "name": "towns",
-      "entityType": "tables"
-    },
-    {
-      "type": "integer",
-      "notNull": false,
-      "autoincrement": true,
-      "default": null,
-      "generated": null,
-      "name": "id",
-      "entityType": "columns",
-      "table": "players"
-    },
-    {
-      "type": "integer",
-      "notNull": true,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "town_id",
-      "entityType": "columns",
-      "table": "players"
-    },
-    {
-      "type": "text",
-      "notNull": true,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "discord_user_id",
-      "entityType": "columns",
-      "table": "players"
-    },
-    {
-      "type": "integer",
-      "notNull": true,
-      "autoincrement": false,
-      "default": "0",
-      "generated": null,
-      "name": "coins",
-      "entityType": "columns",
-      "table": "players"
-    },
-    {
-      "type": "integer",
-      "notNull": true,
-      "autoincrement": false,
-      "default": "0",
-      "generated": null,
-      "name": "xp",
-      "entityType": "columns",
-      "table": "players"
-    },
-    {
-      "type": "integer",
-      "notNull": false,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "last_checkin_at",
-      "entityType": "columns",
-      "table": "players"
-    },
-    {
-      "type": "integer",
-      "notNull": false,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "last_visit_at",
-      "entityType": "columns",
-      "table": "players"
-    },
-    {
-      "type": "integer",
-      "notNull": true,
-      "autoincrement": false,
-      "default": "(unixepoch())",
-      "generated": null,
-      "name": "created_at",
-      "entityType": "columns",
-      "table": "players"
-    },
-    {
-      "type": "integer",
-      "notNull": false,
-      "autoincrement": true,
-      "default": null,
-      "generated": null,
-      "name": "id",
-      "entityType": "columns",
-      "table": "towns"
-    },
-    {
-      "type": "text",
-      "notNull": true,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "guild_id",
-      "entityType": "columns",
-      "table": "towns"
-    },
-    {
-      "type": "integer",
-      "notNull": true,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "grid_width",
-      "entityType": "columns",
-      "table": "towns"
-    },
-    {
-      "type": "integer",
-      "notNull": true,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "grid_height",
-      "entityType": "columns",
-      "table": "towns"
-    },
-    {
-      "type": "integer",
-      "notNull": true,
-      "autoincrement": false,
-      "default": "6",
-      "generated": null,
-      "name": "reset_hour",
-      "entityType": "columns",
-      "table": "towns"
-    },
-    {
-      "type": "text",
-      "notNull": true,
-      "autoincrement": false,
-      "default": "'UTC'",
-      "generated": null,
-      "name": "timezone",
-      "entityType": "columns",
-      "table": "towns"
-    },
-    {
-      "type": "text",
-      "notNull": false,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "digest_channel_id",
-      "entityType": "columns",
-      "table": "towns"
-    },
-    {
-      "type": "text",
-      "notNull": false,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "current_season",
-      "entityType": "columns",
-      "table": "towns"
-    },
-    {
-      "type": "text",
-      "notNull": true,
-      "autoincrement": false,
-      "default": "'{}'",
-      "generated": null,
-      "name": "settings",
-      "entityType": "columns",
-      "table": "towns"
-    },
-    {
-      "type": "integer",
-      "notNull": true,
-      "autoincrement": false,
-      "default": "(unixepoch())",
-      "generated": null,
-      "name": "created_at",
-      "entityType": "columns",
-      "table": "towns"
-    },
-    {
-      "columns": [
-        "town_id"
-      ],
-      "tableTo": "towns",
-      "columnsTo": [
-        "id"
-      ],
-      "onUpdate": "NO ACTION",
-      "onDelete": "NO ACTION",
-      "nameExplicit": false,
-      "name": "fk_players_town_id_towns_id_fk",
-      "entityType": "fks",
-      "table": "players"
-    },
-    {
-      "columns": [
-        "id"
-      ],
-      "nameExplicit": false,
-      "name": "players_pk",
-      "table": "players",
-      "entityType": "pks"
-    },
-    {
-      "columns": [
-        "id"
-      ],
-      "nameExplicit": false,
-      "name": "towns_pk",
-      "table": "towns",
-      "entityType": "pks"
-    },
-    {
-      "columns": [
-        {
-          "value": "town_id",
-          "isExpression": false
-        },
-        {
-          "value": "discord_user_id",
-          "isExpression": false
-        }
-      ],
-      "isUnique": true,
-      "where": null,
-      "origin": "manual",
-      "name": "players_town_user_idx",
-      "entityType": "indexes",
-      "table": "players"
-    },
-    {
-      "columns": [
-        "guild_id"
-      ],
-      "nameExplicit": false,
-      "name": "towns_guild_id_unique",
-      "entityType": "uniques",
-      "table": "towns"
-    }
-  ],
-  "renames": []
+	"version": "7",
+	"dialect": "sqlite",
+	"id": "c78a71e8-ca8a-44ef-9f54-733dc125f564",
+	"prevIds": ["00000000-0000-0000-0000-000000000000"],
+	"ddl": [
+		{
+			"name": "players",
+			"entityType": "tables"
+		},
+		{
+			"name": "towns",
+			"entityType": "tables"
+		},
+		{
+			"type": "integer",
+			"notNull": false,
+			"autoincrement": true,
+			"default": null,
+			"generated": null,
+			"name": "id",
+			"entityType": "columns",
+			"table": "players"
+		},
+		{
+			"type": "integer",
+			"notNull": true,
+			"autoincrement": false,
+			"default": null,
+			"generated": null,
+			"name": "town_id",
+			"entityType": "columns",
+			"table": "players"
+		},
+		{
+			"type": "text",
+			"notNull": true,
+			"autoincrement": false,
+			"default": null,
+			"generated": null,
+			"name": "discord_user_id",
+			"entityType": "columns",
+			"table": "players"
+		},
+		{
+			"type": "integer",
+			"notNull": true,
+			"autoincrement": false,
+			"default": "0",
+			"generated": null,
+			"name": "coins",
+			"entityType": "columns",
+			"table": "players"
+		},
+		{
+			"type": "integer",
+			"notNull": true,
+			"autoincrement": false,
+			"default": "0",
+			"generated": null,
+			"name": "xp",
+			"entityType": "columns",
+			"table": "players"
+		},
+		{
+			"type": "integer",
+			"notNull": false,
+			"autoincrement": false,
+			"default": null,
+			"generated": null,
+			"name": "last_checkin_at",
+			"entityType": "columns",
+			"table": "players"
+		},
+		{
+			"type": "integer",
+			"notNull": false,
+			"autoincrement": false,
+			"default": null,
+			"generated": null,
+			"name": "last_visit_at",
+			"entityType": "columns",
+			"table": "players"
+		},
+		{
+			"type": "integer",
+			"notNull": true,
+			"autoincrement": false,
+			"default": "(unixepoch())",
+			"generated": null,
+			"name": "created_at",
+			"entityType": "columns",
+			"table": "players"
+		},
+		{
+			"type": "integer",
+			"notNull": false,
+			"autoincrement": true,
+			"default": null,
+			"generated": null,
+			"name": "id",
+			"entityType": "columns",
+			"table": "towns"
+		},
+		{
+			"type": "text",
+			"notNull": true,
+			"autoincrement": false,
+			"default": null,
+			"generated": null,
+			"name": "guild_id",
+			"entityType": "columns",
+			"table": "towns"
+		},
+		{
+			"type": "integer",
+			"notNull": true,
+			"autoincrement": false,
+			"default": null,
+			"generated": null,
+			"name": "grid_width",
+			"entityType": "columns",
+			"table": "towns"
+		},
+		{
+			"type": "integer",
+			"notNull": true,
+			"autoincrement": false,
+			"default": null,
+			"generated": null,
+			"name": "grid_height",
+			"entityType": "columns",
+			"table": "towns"
+		},
+		{
+			"type": "integer",
+			"notNull": true,
+			"autoincrement": false,
+			"default": "6",
+			"generated": null,
+			"name": "reset_hour",
+			"entityType": "columns",
+			"table": "towns"
+		},
+		{
+			"type": "text",
+			"notNull": true,
+			"autoincrement": false,
+			"default": "'UTC'",
+			"generated": null,
+			"name": "timezone",
+			"entityType": "columns",
+			"table": "towns"
+		},
+		{
+			"type": "text",
+			"notNull": false,
+			"autoincrement": false,
+			"default": null,
+			"generated": null,
+			"name": "digest_channel_id",
+			"entityType": "columns",
+			"table": "towns"
+		},
+		{
+			"type": "text",
+			"notNull": false,
+			"autoincrement": false,
+			"default": null,
+			"generated": null,
+			"name": "current_season",
+			"entityType": "columns",
+			"table": "towns"
+		},
+		{
+			"type": "text",
+			"notNull": true,
+			"autoincrement": false,
+			"default": "'{}'",
+			"generated": null,
+			"name": "settings",
+			"entityType": "columns",
+			"table": "towns"
+		},
+		{
+			"type": "integer",
+			"notNull": true,
+			"autoincrement": false,
+			"default": "(unixepoch())",
+			"generated": null,
+			"name": "created_at",
+			"entityType": "columns",
+			"table": "towns"
+		},
+		{
+			"columns": ["town_id"],
+			"tableTo": "towns",
+			"columnsTo": ["id"],
+			"onUpdate": "NO ACTION",
+			"onDelete": "NO ACTION",
+			"nameExplicit": false,
+			"name": "fk_players_town_id_towns_id_fk",
+			"entityType": "fks",
+			"table": "players"
+		},
+		{
+			"columns": ["id"],
+			"nameExplicit": false,
+			"name": "players_pk",
+			"table": "players",
+			"entityType": "pks"
+		},
+		{
+			"columns": ["id"],
+			"nameExplicit": false,
+			"name": "towns_pk",
+			"table": "towns",
+			"entityType": "pks"
+		},
+		{
+			"columns": [
+				{
+					"value": "town_id",
+					"isExpression": false
+				},
+				{
+					"value": "discord_user_id",
+					"isExpression": false
+				}
+			],
+			"isUnique": true,
+			"where": null,
+			"origin": "manual",
+			"name": "players_town_user_idx",
+			"entityType": "indexes",
+			"table": "players"
+		},
+		{
+			"columns": ["guild_id"],
+			"nameExplicit": false,
+			"name": "towns_guild_id_unique",
+			"entityType": "uniques",
+			"table": "towns"
+		}
+	],
+	"renames": []
 }
