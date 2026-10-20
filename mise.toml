@@ -1,0 +1,52 @@
+[settings]
+lockfile = true
+idiomatic_version_file_enable_tools = ["node", "pnpm"]
+
+[env]
+NODE_ENV = { default = "development" }
+_.path = ["{{config_root}}/node_modules/.bin"]
+
+[tasks.install]
+description = "Install the locked npm dependency tree"
+alias = "i"
+run = "pnpm install"
+sources = ["mise.toml", "package.json", "pnpm-lock.yaml"]
+outputs = ["node_modules/.pnpm/lock.yaml"]
+
+[tasks.start]
+description = "Start the development server"
+alias = "s"
+run = "pnpm run start"
+depends = ["install"]
+
+[tasks.lint]
+description = "Run the project's lint script"
+alias = "l"
+run = "pnpm run lint"
+depends = ["install"]
+
+[tasks.fmt]
+description = "Run the project's fmt script"
+alias = "l"
+run = "pnpm run fmt"
+depends = ["install"]
+
+[tasks.test]
+description = "Run the project's tests"
+alias = "t"
+run = "pnpm test"
+depends = ["install"]
+
+[tasks.build]
+description = "Build the project"
+alias = "b"
+run = "pnpm run build"
+depends = ["install"]
+
+[tasks.dev]
+description = "Run the dev script from package.json"
+run = "pnpm run dev"
+depends = ["install"]
+
+[tools]
+hk = { version = "latest", workflow = "release.yml" }

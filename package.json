@@ -1,19 +1,39 @@
 {
-  "name": "store-galore",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "deploy": "wrangler deploy",
-    "dev": "wrangler dev",
-    "start": "wrangler dev",
-    "test": "vitest",
-    "cf-typegen": "wrangler types"
-  },
-  "devDependencies": {
-    "@cloudflare/vitest-plugin": "^1.0.0",
-    "@types/node": "^26.6.5",
-    "typescript": "^5.5.2",
-    "vitest": "~4.1.0",
-    "wrangler": "^4.151.2"
-  }
+    "name": "store-galore",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "deploy": "wrangler deploy",
+        "dev": "wrangler dev",
+        "start": "wrangler dev",
+        "test": "vitest",
+        "cf-typegen": "wrangler types",
+        "fmt": "oxfmt",
+        "fmt:check": "oxfmt --check",
+        "lint": "oxlint",
+        "lint:fix": "oxlint --fix"
+    },
+    "devDependencies": {
+        "@cloudflare/vitest-plugin": "^1.0.0",
+        "@types/node": "^26.6.5",
+        "oxfmt": "^0.73.0",
+        "oxlint": "^1.88.0",
+        "oxlint-tsgolint": "^7.0.2004",
+        "typescript": "^5.5.2",
+        "vitest": "~4.1.0",
+        "wrangler": "^4.151.2"
+    },
+    "devEngines": {
+        "packageManager": {
+            "name": "pnpm",
+            "version": "12.14.0",
+            "onFail": "error"
+        },
+        "runtime": {
+            "name": "node",
+            "version": "26.12.0",
+            "onFail": "error"
+        }
+    }
 }
